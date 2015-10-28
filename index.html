@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html><!-- v.01 --><head>
+	<title>Web Application</title>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+
+<h3>
+Game companies and their console systems
+</h3>
+
+Enter name of company:<br>
+
+<input id="inputString" type="text" onkeypress="if (event.keyCode == 13) { handleSearch();}"> <br>
+
+<button type="button" onclick="handleSearch();">Search</button>
+
+<h2 id="company"></h2>
+<ol id="consoles"></ol>
+
+<script>
+
+
+var handleSearch = function(num) {
+    var company = document.getElementById('inputString').value.toUpperCase();
+    
+    var found = false;
+    
+    for(var x = 0; x < gameSystems.length; x++)
+    {
+    	if(gameSystems[x].value.indexOf(company) >= 0)
+    	{	
+    		found = true;
+    		
+    		var consoles = gameSystems[x].consoles;
+    		
+    		var consoleName = gameSystems[x].title;
+    		
+    		var compElement = document.getElementById('company');
+    		compElement.innerHTML = consoleName;
+    		
+    		consolesList = "";
+    		for(var propName in consoles) {
+                var console = consoles[propName];
+                consolesList += "<li>" + console.title + "<div style='text-align:center'>" +
+				console.year + "</li>";
+            }
+            
+            var consolesElement = document.getElementById('consoles');
+            consolesElement.innerHTML = consolesList;
+    		
+    		break;
+    	}
+    
+    };
+    
+    if(found == false)
+    {
+    	alert("The company " + company + " was not found.");
+    }
+};
+
+gameSystems = [
+{"value":"ATARI","title":"Atari","consoles":[
+	{"value":"A2600","title":"Atari 2600","year":"1977 (NA)"},
+	{"value":"A5200","title":"Atari 5200 SuperSystem","year":"1982 (NA)"},
+	{"value":"A7800","title":"Atari 7800 ProSystem","year":"1986 (NA)"},
+	{"value":"XEGS","title":"Atari XE Video Game System","year":"1988 (NA)"},
+	{"value":"LYNX","title":"Atari Lynx","year":"1989 (NA)"},
+	{"value":"JAGUAR","title":"Atari Jaguar","year":"1993 (NA)"},
+	{"value":"JAGUARCD","title":"Atari Jaguar CD","year":"1995 (NA)"}
+]},
+{"value":"COMMODORE","title":"Commodore","consoles":[
+	{"value":"C64","title":"Commodore 64","year":"1982 (NA)"},
+	{"value":"CDTV","title":"Commodore CDTV","year":"1991 (NA)"},
+	{"value":"ACD32","title":"Amiga CD32","year":"1993 (EU)"}
+]},
+{"value":"MICROSOFT","title":"Microsoft","consoles":[
+	{"value":"XBOX","title":"Xbox","year":"2001 (NA)"},
+	{"value":"XBOX360","title":"Xbox 360","year":"2005 (WW)"},
+	{"value":"XBOX1","title":"Xbox One","year":"2013 (NA)"}
+]},
+{"value":"NEC","title":"NEC","consoles":[
+	{"value":"TG16","title":"TurbGrafx-16","year":"1987 (JP)"},
+	{"value":"SGX","title":"PC Engine SuperGrafx","year":"1989 (JP)"},
+	{"value":"TURBOD","title":"TurdoDuo","year":"1991 (JP)"},
+	{"value":"PCFX","title":"PC-FX","year":"1994 (JP)"}
+]},
+{"value":"NINTENDO","title":"Nintendo","consoles":[
+	{"value":"NES","title":"Nintendo Entertainment System/Famicom","year":"1983 (JP)"},
+	{"value":"GB","title":"Game Boy","year":"1989 (JP)"},
+	{"value":"SNES","title":"Super Nintendo Entertainment System/Super Famicom","year":"1990 (JP)"},
+	{"value":"N64","title":"Nintendo 64","year":"1996 (JP)"},
+	{"value":"GBC","title":"Game Boy Color","year":"1998 (WW)"},
+	{"value":"GBA","title":"Game Boy Advance","year":"2001 (JP)"},
+	{"value":"GC","title":"GameCube","year":"2001 (JP)"},
+	{"value":"NDS","title":"Nintendo DS","year":"2004 (JP)"},
+	{"value":"WII","title":"Wii","year":"2006 (WW)"},
+	{"value":"3DS","title":"Nintendo 3DS","year":"2011 (WW)"},
+	{"value":"WIIU","title":"Wii U","year":"2012 (WW)"}
+]},
+{"value":"PHILIPS","title":"Philips","consoles":[
+	{"value":"TELES","title":"Tele-Spiel","year":"1975 (EU)"},
+	{"value":"PODYSSEY","title":"Philips Odyssey","year":"1976 (NA)"},
+	{"value":"MAGODYSS","title":"Magnavox Odyssey","year":"1978 (EU)"},
+	{"value":"CDI","title":"Philips CD-i","year":"1991 (NA)"}
+]},
+{"value":"SEGA","title":"Sega","consoles":[
+	{"value":"SG1000","title":"SG-1000","year":"1983 (JP)"},
+	{"value":"SG1000II","title":"SG-1000 II","year":"1984 (JP)"},
+	{"value":"SMS","title":"Master System","year":"1985 (JP)"},
+	{"value":"GENESIS","title":"Sega Genesis","year":"1988 (JP)"},
+	{"value":"SGG","title":"Sega Game Gear","year":"1990 (JP)"},
+	{"value":"SCD","title":"Sega CD","year":"1991 (JP)"},
+	{"value":"PICO","title":"Sega Pico","year":"1993 (JP)"},
+	{"value":"32X","title":"Sega 32X","year":"1994 (JP)"},
+	{"value":"SATURN","title":"Sega Saturn","year":"1994 (JP)"},
+	{"value":"DREAMCAST","title":"Dreamcast","year":"1998 (JP)"},
+	{"value":"APB","title":"Advanced Pico Beena","year":"2005 (JP)"}
+]},
+{"value":"SNK","title":"SNK","consoles":[
+	{"value":"NEOG","title":"Neo Geo","year":"1990 (JP)"},
+	{"value":"NEOGCD","title":"Neo Geo CD","year":"1994 (JP)"}
+]},
+{"value":"SONY","title":"Sony","consoles":[
+	{"value":"PS","title":"PlayStation","year":"1994 (JP)"},
+	{"value":"PS2","title":"PlayStation 2","year":"2000 (WW)"},
+	{"value":"PSP","title":"PlayStation Portable","year":"2004 (JP)"},
+	{"value":"PS3","title":"PlayStation 3","year":"2006 (JP)"},
+	{"value":"PSV","title":"PlayStation Vita","year":"2011 (JP)"},
+	{"value":"PS4","title":"PlayStation 4","year":"2013 (NA)"}
+]}
+];
+
+</script>
+
+
+</body></html>
