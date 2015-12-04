@@ -80,6 +80,48 @@ var gameSystems = [
 ]}
 ];
 
+function handleSearch(company, response) {
+    var company = company.toUpperCase();
+    
+    var found = false;
+    
+    for(var x = 0; x < gameSystems.length; x++)
+    {
+     	if(gameSystems[x].name.indexOf(company) >= 0)
+    	{	
+    		found = true;
+    		
+    		var consoles = gameSystems[x].consoles;
+    		
+    		var consoleName = gameSystems[x].title;
+    		
+    		//var compElement = document.getElementById('company');
+    		//compElement.innerHTML = consoleName;
+			response.write("<h2>"+consoleName+"</h2>");
+    		
+    		var consolesList = "<ol>";
+    		for(var propName in consoles) {
+                var console = consoles[propName];
+                consolesList += "<li>" + console.title + "<div style='text-align:center'>" +
+				console.year + "</li>";
+            }
+			consolesList += "</ol>";
+            
+            //var consolesElement = document.getElementById('consoles');
+            //consolesElement.innerHTML = consolesList;
+			response.write(consolesList);
+    		
+    		break;
+    	}
+    
+    };
+    
+/*     if(found == false)
+    {
+    	alert("The company " + company + " was not found.");
+    } */
+};
+
 http.createServer(function (request, response) {
     console.log('request starting...');
     
@@ -97,16 +139,21 @@ http.createServer(function (request, response) {
     {	
 		var command = parsedURL.query.command;
 		
-		var operand = parsedURL.query.operand;
+		//var operand = parsedURL.query.operand;
+		var operand = parsedURL.query.operand.toUpperCase();
 		
 		console.log("COMMAND: " + command + ", " + operand);
 
 		
 		if(command === "get")
 		{
-			console.log("RESULT: " + JSON.stringify(gameSystems[operand]));
+			//console.log("RESULT: " + JSON.stringify(gameSystems[operand]));
+			//have array of objects. need to find which one matches the name or is close to it. see full html version for details
+			console.log("RESULT: " + operand);
 			
 			response.writeHead(200, { 'Content-Type': contentType });
+
+			handleSearch(operand, response);
 	
 			response.end(JSON.stringify(gameSystems[operand]), 'utf-8');
 		}
